@@ -13,7 +13,15 @@ $(document).ready(function () {
             }
         }
     });
+    
+    $('.money').mask("#.##0,00", {reverse: true});
 
+});
+
+$("#btnNuevo").on("click", () => {
+    $("#tituloModal").html("Nuevo Producto");
+    $(".form-control").val("");
+    $("#myModal").modal("show");
 });
 
 
