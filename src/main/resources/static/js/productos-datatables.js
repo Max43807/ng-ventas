@@ -24,4 +24,41 @@ $("#btnNuevo").on("click", () => {
     $("#myModal").modal("show");
 });
 
+$("#btnGuardar").on("click", () => {
+    
+    //Crear un objeto articulo:
+    let articulo = {};
+    
+    articulo.codBarras = $("#codBar").val();
+    articulo.descripcion = $("#descripcion").val();
+    articulo.precio = $("#precio").val();
+    articulo.stock = $("#stock").val();
+    
+    $.ajax({
+       method: "POST",
+       url: "/productos/guardar",
+       data: articulo,
+       beforeSend: function () {
+           $(".is-invalid").removeClass("is-invalid");
+           $("span").closest(".error-span").remove();
+       },
+       success: function() {
+           $("myModal").modal("hide");
+           alert("Producto guardado!");
+       },
+       statusCode: {
+           422: function (xhr) {
+               let errors = $.parseJSON(xhr.responseText);
+               console.log("Errores: " + xhr.status);
+               $.each(errors, function(key, val) {
+                   $("#" + key).addClass("is-invalid");
+                   $("#error-" + key).addClass("invalid-feedback")
+                           .append("<span class='error-span'>" + val + "</span>");
+               });
+           }
+       }
+    });
+    
+});
+
 
