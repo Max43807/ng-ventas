@@ -59,18 +59,8 @@ public class ProductoController {
             }
             return ResponseEntity.unprocessableEntity().body(errors);
         }
-        
-        Articulo a = new Articulo();
-        if(articulo.getId() != 0) {
-            a = articuloService.buscarPorId(articulo.getId());
-        }
-        
-        a.setCodBarras(articulo.getCodBarras());
-        a.setDescripcion(articulo.getDescripcion());
-        a.setStock(articulo.getStock());
-        a.setPrecio(articulo.getPrecio());
-        
-        articuloService.guardar(a);
+                
+        articuloService.guardar(articulo);
         
         return ResponseEntity.ok().build();
     }

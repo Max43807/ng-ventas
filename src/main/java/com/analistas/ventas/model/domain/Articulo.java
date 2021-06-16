@@ -38,7 +38,7 @@ public class Articulo implements Serializable {
     private String descripcion;
     
     @NotNull(message = "El precio es requerido...")
-    @NumberFormat(pattern = "#.##", style = NumberFormat.Style.CURRENCY)
+    @NumberFormat(pattern = "#,##0.00", style = NumberFormat.Style.CURRENCY)
     private Double precio;
     
     @NotNull(message = "El stock es requerido...")
