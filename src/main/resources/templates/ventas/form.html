@@ -41,6 +41,7 @@
                             </div>
                         </div>
                         <hr />
+                        <h4 class="text-info mb-4">Elija los productos:</h4>
                         <div class="row">
                             <div class="col col-12">
                                 <div class="form-group">
@@ -51,6 +52,45 @@
                                 </div>
                             </div>
                         </div>
+
+                        <!-- Tabla Template -->
+                        <table class="d-none">
+                            <tbody id="ventaItems">
+                                <tr id="row_{ID}">
+                                    <td class="d-none">
+                                        <input type="hidden" value="{ID}" name="item_id[]"></input>
+                                    </td>
+                                    <td>{DESCRIPCION}</td>
+                                    <td>
+                                        <input type="text" value="{PRECIO}" name="precio_actual[]" id="precio_actual_{ID}"
+                                            class="form-control" style="width: 110px; min-width: 110px;"
+                                            onchange="lineasUtil.calcularSubtotal({ID}, this.value, cantidad_{ID}.value);"
+                                               />
+                                    </td>
+                                    <td>
+                                        <input type="number" value="1" min="0" name="cantidad[]" id="cantidad_{ID}"
+                                               style="width: 110px; min-width: 110px;"
+                                               class="form-control" onchange="lineasUtil.calcularSubtotal({ID}, precio_actual_{ID}.value, this.value);"/>
+                                    </td>
+                                    <td>
+                                        <span id="subtotal_{ID}" style="width: 110px; min-width: 110px;">0,00</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <!-- Tabla original -->
+                        <table id="tabla" class="table table-bordered table-hover table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Descripción</th>
+                                    <th>Precio</th>
+                                    <th>Cantidad</th>
+                                    <th>Subtotal</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
                     </div>
                 </div>
             </form>
