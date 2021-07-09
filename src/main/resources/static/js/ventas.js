@@ -1,6 +1,14 @@
 // In your Javascript (external .js resource or <script> tag)
 $(document).ready(function () {
     $('.select-productos').select2();
+
+    if ($("#success").text() !== "") {
+        Swal.fire(
+                'Ventas',
+                $("#success").text(),
+                'success'
+                )
+    }
 });
 
 $("#select_productos").on("change", () => {
@@ -11,8 +19,8 @@ $("#select_productos").on("change", () => {
     let descripcion = producto.split('-')[1];
     let precio = producto.split('-')[2];
     //console.log(producto);
-    
-    if(lineasUtil.esRepetido(id)) {
+
+    if (lineasUtil.esRepetido(id)) {
         console.log("Ya hay ese producto");
         lineasUtil.incrementarCantidad(id);
         limpiar();
@@ -23,9 +31,9 @@ $("#select_productos").on("change", () => {
     linea = linea.replace(/{DESCRIPCION}/g, descripcion);
     linea = linea.replace(/{PRECIO}/g, precio);
     linea = linea.replace(/{CANTIDAD}/g, 1);
-    
+
     $("#tabla tbody").append(linea);
-    
+
     lineasUtil.calcularSubtotal(id, precio, 1);
 
     limpiar();
@@ -37,16 +45,16 @@ const limpiar = () => {
 }
 
 const lineasUtil = {
-    esRepetido: function(id) {
+    esRepetido: function (id) {
         let resultado = false;
-        $('input[name="item_id[]"]').each(function() {
-            if(parseInt(id) == parseInt($(this).val())) {
+        $('input[name="item_id[]"]').each(function () {
+            if (parseInt(id) == parseInt($(this).val())) {
                 resultado = true;
             }
         });
         return resultado;
     },
-    incrementarCantidad: function(id) {
+    incrementarCantidad: function (id) {
         let cantidad = $("#cantidad_" + id).val() ? parseInt($("#cantidad_" + id).val()) : 0;
         $("#cantidad_" + id).val(++cantidad);
         this.calcularSubtotal(id, $(`#precio_actual_${id}`).val(), cantidad);
@@ -57,7 +65,7 @@ const lineasUtil = {
     },
     calcularTotal: function () {
         let total = 0;
-        $(`span[id^="subtotal_"]`).each(function() {
+        $(`span[id^="subtotal_"]`).each(function () {
             total += parseFloat($(this).html());
         });
         $("#total").html("$" + parseFloat(total).toFixed(2));

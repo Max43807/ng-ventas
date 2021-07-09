@@ -11,6 +11,7 @@
     </head>
     <body>
         <div layout:fragment="cuerpo">
+            <span id="success" th:text="${success}" hidden="true"></span>
             <form id="form" th:action="@{/ventas/guardar}" th:object="${venta}" method="post">
                 <div class="card mt-4">
                     <div class="card-header" th:text="${titulo}">
@@ -91,6 +92,9 @@
                             </thead>
                             <tbody></tbody>
                         </table>
+                    </div>
+                    <div class="card-footer text-right">
+                        <a class="btn btn-primary" onclick="$('#form').submit();">Registrar Venta</a>
                     </div>
                 </div>
             </form>
