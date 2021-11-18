@@ -28,10 +28,6 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-/**
- *
- * @author ander
- */
 @Controller
 @RequestMapping("/ventas")
 @SessionAttributes({"venta"})
@@ -99,5 +95,12 @@ public class VentaController {
     @ModelAttribute("productos")
     public List<Articulo> getProductos() {
         return productoService.buscarTodo();
+    }
+    
+    @GetMapping({"/listado"})
+    public String verListado(Model model) {
+        model.addAttribute("ventas", ventaService.listarTodo());
+        
+        return "ventas/list";
     }
 }

@@ -23,8 +23,9 @@ public class VentaServiceImpl implements IVentaService {
     IVentaRepository ventaRepo;
     
     @Override
+    @Transactional
     public List<Venta> listarTodo() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return ventaRepo.findAll();
     }
 
     @Override

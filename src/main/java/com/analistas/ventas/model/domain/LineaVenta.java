@@ -30,11 +30,11 @@ public class LineaVenta implements Serializable{
     private Long id;
     
     @Min(value = 1)
-    private int cantidad;
+    public int cantidad;
     
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "articulo_id")
-    private Articulo articulo;
+    public Articulo articulo;
 
     public Long getId() {
         return id;

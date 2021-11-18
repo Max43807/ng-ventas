@@ -16,11 +16,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import org.springframework.format.annotation.DateTimeFormat;
+
 
 /**
  *
@@ -43,7 +45,11 @@ public class Venta implements Serializable {
     
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "venta_id")
-    private List<LineaVenta> lineas;
+    public List<LineaVenta> lineas;
+    
+    @ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="id_usuario")
+	private Usuario usuario;
     
     //private Cliente cliente;
     //private Usuario cajero;
